@@ -1,275 +1,309 @@
 # Bluetooth Test Automation Framework
 
-### Python | Pytest | Bluetooth Low Energy (BLE) | Linux | Test Automation
+### Python · Pytest · Bluetooth Low Energy (BLE) · Linux · Test Automation
 
-A Python-based test automation framework designed to simulate Bluetooth Low Energy (BLE) functional validation scenarios, verify device interaction workflows, and generate structured test reports for debugging and test result analysis.
+<p align="center">
+  <img src="https://img.shields.io/badge/Python-3.x-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python"/>
+  <img src="https://img.shields.io/badge/Pytest-Testing-0A9EDC?style=for-the-badge&logo=pytest&logoColor=white" alt="Pytest"/>
+  <img src="https://img.shields.io/badge/Bluetooth-LE-0082FC?style=for-the-badge&logo=bluetooth&logoColor=white" alt="Bluetooth Low Energy"/>
+  <img src="https://img.shields.io/badge/Linux-Ubuntu-FCC624?style=for-the-badge&logo=linux&logoColor=black" alt="Linux"/>
+  <img src="https://img.shields.io/badge/Reports-JSON%20%7C%20HTML-2E8B57?style=for-the-badge" alt="JSON and HTML reports"/>
+</p>
 
-This project demonstrates a systematic approach to embedded software validation through reusable test cases, automated assertions, negative testing, exception handling, and machine-readable test reporting.
+<p align="center">
+  <b>A Python-based framework for automating simulated Bluetooth Low Energy functional validation scenarios.</b>
+</p>
 
-> **Project type:** Embedded Systems Test Automation  
-> **Testing approach:** BLE simulation and automated functional testing  
-> **Current scope:** Software-based simulation; physical Bluetooth hardware integration is a future enhancement.
-
----
-
-## Table of Contents
-
-- [Project Overview](#project-overview)
-- [Engineering Objectives](#engineering-objectives)
-- [Key Features](#key-features)
-- [System Architecture](#system-architecture)
-- [Test Coverage](#test-coverage)
-- [Technology Stack](#technology-stack)
-- [Project Structure](#project-structure)
-- [Installation and Setup](#installation-and-setup)
-- [Running the Tests](#running-the-tests)
-- [Test Reporting](#test-reporting)
-- [Engineering Approach](#engineering-approach)
-- [Limitations and Future Enhancements](#limitations-and-future-enhancements)
-- [Skills Demonstrated](#skills-demonstrated)
-- [Author](#author)
+<p align="center">
+  <a href="https://www.linkedin.com/in/manjunathgl/">LinkedIn</a> •
+  <a href="https://github.com/ManjunathGlO">GitHub Profile</a>
+</p>
 
 ---
 
-## Project Overview
+## 📌 Project Overview
 
-Bluetooth Low Energy is widely used in embedded products, connected devices, sensors, and wireless communication systems. Validating device discovery, connection handling, data exchange, and failure scenarios is an important part of developing reliable wireless software.
+Bluetooth Low Energy (BLE) is widely used in embedded devices, wireless sensors, connected products, and IoT applications. Reliable wireless functionality requires systematic testing of device discovery, connection handling, data exchange, and failure scenarios.
 
-This project implements a Python-based automation framework that simulates BLE device interactions and executes repeatable functional test scenarios using Pytest.
+The **Bluetooth Test Automation Framework** is a Python-based project that uses Pytest to execute repeatable functional tests against a simulated BLE environment.
 
-The framework is designed to:
+The framework demonstrates core software validation practices, including automated assertions, positive and negative testing, exception handling, and structured test reporting.
 
-- Automate functional test execution.
+**Project objective:** Develop a maintainable foundation for embedded connectivity testing and demonstrate practical test automation concepts relevant to entry-level embedded software validation roles.
+
+> **Testing scope:** This version uses BLE simulation. It does not establish a connection to physical Bluetooth hardware.
+
+## 🎯 Engineering Objectives
+
+- Automate repeatable BLE functional test scenarios.
 - Validate expected behavior using assertions.
-- Exercise positive and negative test scenarios.
-- Capture test failures for troubleshooting.
-- Generate structured reports for reviewing test outcomes.
+- Test device discovery, connection, disconnection, and simulated data exchange.
+- Exercise invalid inputs and simulated failure conditions.
+- Improve debugging through test logs and failure messages.
+- Generate structured JSON and human-readable HTML reports.
+- Build a foundation for future hardware-based connectivity testing.
 
-The objective is to demonstrate foundational embedded validation and test automation practices relevant to entry-level embedded software testing and validation roles.
-
-## Engineering Objectives
-
-1. **Functional validation:** Verify expected behavior across simulated BLE interaction workflows.
-2. **Test automation:** Replace repetitive manual checks with reusable automated test cases.
-3. **Negative testing:** Evaluate how the framework handles invalid inputs and simulated failures.
-4. **Debugging support:** Capture test outcomes and diagnostic information.
-5. **Reporting:** Produce machine-readable JSON results and human-readable HTML reports.
-
-## Key Features
+## ✨ Key Features
 
 | Feature | Description |
 |---|---|
-| BLE device discovery | Simulates device scanning and discovery scenarios. |
-| Connection handling | Tests connection establishment and disconnection workflows. |
+| Device discovery | Simulates BLE scanning and device discovery scenarios. |
+| Connection handling | Tests simulated connection and disconnection workflows. |
 | Data exchange | Validates simulated characteristic read and write operations. |
-| Negative testing | Covers invalid inputs and simulated connection failures. |
-| Automated assertions | Checks expected outcomes and reports unexpected behavior. |
-| Exception handling | Handles supported error scenarios during test execution. |
-| Test reporting | Generates JSON and HTML summaries for analysis. |
-| Repeatable execution | Uses Pytest to organize and execute automated tests. |
+| Negative testing | Exercises invalid inputs and simulated connection failures. |
+| Automated assertions | Compares actual results with expected outcomes. |
+| Exception handling | Tests supported error scenarios and unexpected outcomes. |
+| Test reporting | Supports structured JSON and HTML result summaries. |
+| Repeatable execution | Uses Pytest to organize and execute test cases. |
+| Linux compatibility | Supports development in Linux / Ubuntu environments. |
 
-## System Architecture
-
-The framework follows a modular testing workflow:
+## 🏗️ System Architecture
 
 ```text
-          Test Execution
-                |
-                v
-         Pytest Test Suite
-                |
-                v
-       BLE Simulation Layer
-                |
-                v
-      Simulated BLE Operations
-                |
-        +-------+-------+
-        |               |
-        v               v
-   Assertions       Error Scenarios
-        |               |
-        +-------+-------+
-                |
-                v
-        Test Result Collection
-                |
-          +-----+-----+
-          |           |
-          v           v
-      JSON Report  HTML Report
+              Test Execution
+                    |
+                    v
+             Pytest Test Suite
+                    |
+                    v
+             BLE Simulation Layer
+                    |
+                    v
+          Simulated BLE Operations
+                    |
+          +---------+---------+
+          |                   |
+          v                   v
+    Functional Tests     Negative Tests
+          |                   |
+          +---------+---------+
+                    |
+                    v
+          Assertions & Validation
+                    |
+                    v
+            Result Collection
+                    |
+              +-----+-----+
+              |           |
+              v           v
+          JSON Report  HTML Report
 ```
 
-**Workflow:** Pytest executes test cases against the simulated BLE layer, evaluates expected outcomes, and collects results for reporting.
+### Workflow
 
-The current architecture does not directly communicate with a physical BLE device.
+1. Pytest discovers and executes the automated test cases.
+2. The test cases interact with the BLE simulation layer.
+3. Assertions validate the expected behavior.
+4. Negative scenarios exercise error-handling paths.
+5. Test outcomes are collected and presented through configured reports.
 
-## Test Coverage
+The simulated environment validates the test framework's behavior, not the performance or interoperability of physical Bluetooth devices.
 
-The framework is intended to cover the following functional areas:
+## 🧪 Test Scenarios
 
-| Test area | Validation objective |
+The project focuses on the following functional testing areas.
+
+| Test scenario | Validation objective |
 |---|---|
 | Device discovery | Verify simulated discovery results. |
-| Connection | Validate successful connection scenarios. |
-| Disconnection | Verify device disconnection behavior. |
-| Data exchange | Validate simulated characteristic reads and writes. |
-| Invalid device | Check behavior for unsupported or unknown devices. |
-| Connection failure | Verify expected handling of simulated failures. |
-| Invalid operations | Check error handling for invalid requests. |
-| Result validation | Ensure actual outcomes match expected outcomes. |
+| Successful connection | Validate expected connection behavior. |
+| Disconnection | Check simulated disconnection handling. |
+| Characteristic read | Verify expected simulated read results. |
+| Characteristic write | Validate simulated data-write behavior. |
+| Unknown device | Exercise invalid or unsupported device handling. |
+| Connection failure | Check the expected response to simulated failures. |
+| Invalid operation | Validate supported error-handling scenarios. |
+| Result assertions | Detect mismatches between expected and actual outcomes. |
 
-Test coverage depends on the scenarios implemented in the test suite. See the test files for the exact executable cases.
+The actual test coverage and number of executable cases depend on the implementation in the repository's test files.
 
-## Technology Stack
+## 🛠️ Technology Stack
 
-- **Python:** Test logic, reusable functions, and error handling.
-- **Pytest:** Test discovery, execution, fixtures, and assertions.
-- **Linux / Ubuntu:** Development and test execution environment.
-- **Git and GitHub:** Version control and project management.
-- **JSON:** Structured test result output.
-- **HTML:** Human-readable test reporting.
-- **BLE simulation:** Software-based modeling of Bluetooth interaction scenarios.
+| Technology | Purpose |
+|---|---|
+| Python | Test logic, reusable functions, and error handling |
+| Pytest | Test execution, assertions, and test organization |
+| Linux / Ubuntu | Development and test execution environment |
+| Git / GitHub | Version control and source management |
+| JSON | Structured test result reporting |
+| HTML | Human-readable test summaries |
+| BLE simulation | Software-based modeling of BLE interaction scenarios |
 
-## Project Structure
+## 📂 Project Structure
 
 ```text
 bluetooth-test-automation/
+│
 ├── tests/
 │   └── test_ble_functionality.py
+│
 ├── reports/
 │   ├── test-report.json
 │   └── test-report.html
+│
 ├── requirements.txt
 ├── pytest.ini
 ├── run_tests.py
 └── README.md
 ```
 
-*Note: The structure above is illustrative. Adjust filenames to match the actual repository contents before publishing.*
+> **Note:** Update the example tree to match the actual files and directory names in your repository before publishing.
 
-## Installation and Setup
+## ⚙️ Installation and Setup
 
 ### Prerequisites
 
-- Python 3.10 or a compatible version.
-- Linux / Ubuntu, WSL, or another supported Python environment.
+- Python 3.10 or another version supported by the project.
 - Git.
-- Basic familiarity with Python and automated testing.
+- Linux / Ubuntu, WSL, or another compatible environment.
+- Basic knowledge of Python and automated testing.
 
-### 1. Clone the repository
+### Step 1: Clone the repository
 
 ```bash
-git clone <YOUR_GITHUB_REPOSITORY_URL>
+git clone https://github.com/ManjunathGlO/bluetooth-test-automation.git
 cd bluetooth-test-automation
 ```
 
-Replace the placeholder with your actual GitHub repository URL.
+Replace the repository URL and directory name if your GitHub repository uses a different name.
 
-### 2. Create a virtual environment
+### Step 2: Create a virtual environment
 
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
 ```
 
-On Windows PowerShell, activate the environment with:
+For Windows PowerShell:
 
 ```powershell
 .venv\Scripts\Activate.ps1
 ```
 
-### 3. Install dependencies
+### Step 3: Install dependencies
 
 ```bash
+python -m pip install --upgrade pip
 pip install -r requirements.txt
+```
+
+If JSON reporting uses the `pytest-json-report` plugin and it is not already included in `requirements.txt`, install it with:
+
+```bash
 pip install pytest-json-report
 ```
 
-If the JSON reporting plugin is already included in the dependency file, the additional installation is unnecessary.
+## ▶️ Running the Tests
 
-## Running the Tests
-
-Execute the project test runner:
+Run the project's test runner:
 
 ```bash
 python run_tests.py
 ```
 
-Alternatively, run Pytest directly:
+Alternatively, execute Pytest directly:
 
 ```bash
 python -m pytest -v
 ```
 
-To generate a JSON report using the Pytest JSON reporting plugin:
+To generate a JSON report using the `pytest-json-report` plugin:
 
 ```bash
-python -m pytest -v --json-report --json-report-file=reports/test-report.json
+mkdir -p reports
+python -m pytest -v \
+  --json-report \
+  --json-report-file=reports/test-report.json
 ```
 
-Use the reporting command supported by the current project configuration. HTML report generation must be configured in the test runner or through a compatible reporting plugin.
+Use the commands supported by the actual project configuration. HTML reporting must be implemented in the test runner or configured with a compatible reporting plugin.
 
-## Test Reporting
+## 📊 Test Reporting
 
-The framework supports reviewing test execution results through structured reporting.
+The framework is designed to make test outcomes easier to inspect and analyze.
 
-**JSON report**
+### JSON report
 
-Useful for automated result processing, CI pipelines, and extracting test status information.
+JSON reporting is useful for:
 
-**HTML report**
+- Structured test result storage.
+- Automated result processing.
+- Identifying failed test cases.
+- Integrating results with future CI pipelines.
 
-Useful for quickly reviewing test outcomes, identifying failures, and presenting results to engineers.
+### HTML report
 
-Recommended metrics to track as the project evolves:
+HTML reporting is useful for:
 
-- Total test cases executed.
-- Passed and failed test cases.
+- Reviewing test execution results.
+- Presenting test outcomes clearly.
+- Investigating failures.
+- Sharing test summaries with engineering teams.
+
+### Recommended validation metrics
+
+As the framework evolves, consider tracking:
+
+- Total tests executed.
+- Passed and failed tests.
 - Test execution duration.
 - Failure messages and diagnostic logs.
-- Regression results between test runs.
+- Regression results across multiple test runs.
 
-Only report test counts and execution results that can be reproduced from the current test suite.
+Only publish test counts and report screenshots that can be reproduced from your current implementation.
 
-## Engineering Approach
+## 🔍 Engineering Practices Demonstrated
 
-The framework applies several core software testing principles:
+**Modular test design**
+- Organizing tests into understandable, reusable functions.
+- Separating test scenarios from simulated BLE behavior.
 
-- **Modularity:** Separate test scenarios from simulated device behavior.
-- **Repeatability:** Execute the same test scenarios consistently.
-- **Assertions:** Compare actual outcomes with expected behavior.
-- **Negative testing:** Exercise invalid operations and failure conditions.
-- **Diagnostics:** Capture useful information to help investigate failures.
-- **Maintainability:** Organize tests so new scenarios can be added systematically.
+**Functional validation**
+- Defining expected outcomes.
+- Using assertions to identify unexpected behavior.
 
-## Limitations and Future Enhancements
+**Negative testing**
+- Exercising invalid inputs and simulated failures.
+- Checking error-handling behavior.
 
-The current project focuses on software-based BLE simulation. Simulation can validate the test framework's logic, but it cannot establish the real-world reliability or interoperability of Bluetooth hardware.
+**Debugging and reporting**
+- Capturing test outcomes.
+- Producing structured reports for troubleshooting.
 
-Planned enhancements:
+**Maintainability**
+- Keeping the test suite organized.
+- Creating a foundation for additional test scenarios.
 
-- Integrate real BLE scanning and communication using Python's Bleak library.
-- Validate GATT services, characteristics, and descriptors on physical devices.
-- Add configurable connection timeouts and retry scenarios.
-- Introduce parameterized tests for multiple device configurations.
-- Add test logging and failure diagnostics.
-- Integrate automated testing into GitHub Actions.
-- Explore Bluetooth protocol analysis and hardware-in-the-loop validation.
+## 🚀 Future Enhancements
 
-## Skills Demonstrated
+The following enhancements could extend the framework toward practical embedded connectivity validation.
 
-**Programming and automation**
+- [ ] Integrate real BLE scanning and communication using Python's Bleak library.
+- [ ] Validate GATT services, characteristics, and descriptors on physical devices.
+- [ ] Add configurable connection timeouts and retry scenarios.
+- [ ] Introduce parameterized tests for multiple device configurations.
+- [ ] Improve diagnostic logging and failure analysis.
+- [ ] Add regression testing and test coverage measurement.
+- [ ] Integrate automated execution with GitHub Actions.
+- [ ] Explore Bluetooth protocol analysis and hardware-in-the-loop testing.
+
+These items represent potential future work, not features claimed as currently implemented.
+
+## 💼 Skills Demonstrated
+
+**Programming and test automation**
 - Python
 - Pytest
-- Test fixtures and assertions
+- Automated assertions
 - Exception handling
+- Test case design
 
-**Embedded validation fundamentals**
-- BLE functional testing concepts
+**Embedded systems and connectivity**
+- Bluetooth Low Energy fundamentals
 - Device discovery and connection workflows
-- Data exchange validation
-- Negative and failure scenario testing
+- Simulated data exchange
+- Functional and negative testing
 
 **Development tools**
 - Linux / Ubuntu
@@ -277,19 +311,37 @@ Planned enhancements:
 - JSON and HTML reporting
 - Test result analysis
 
-These skills reflect the project's implementation scope and are not a claim of professional Bluetooth qualification or physical hardware testing.
+## 👨‍💻 About the Developer
 
-## Author
+**Manjunath G. L.**  
+*Mechatronics Engineering | Aspiring Embedded Software & Validation Engineer*
 
-**Manjunath G. L.**
+I am interested in embedded systems, wireless connectivity, firmware validation, and Python-based test automation. My goal is to apply engineering fundamentals to practical testing challenges and develop reliable, maintainable validation solutions.
 
-Mechatronics Engineering | Aspiring Embedded Software & Validation Engineer
+I am particularly interested in entry-level opportunities involving embedded software testing, connectivity validation, automation frameworks, and smart-device technologies.
 
-Interested in embedded systems, Python-based test automation, firmware validation, wireless connectivity, and reliable software for connected devices.
+### 🤝 Let's Connect
 
-- **GitHub:** [Add your GitHub profile URL](https://github.com/)
-- **LinkedIn:** [Add your LinkedIn profile URL](https://www.linkedin.com/)
+<p align="center">
+  <a href="https://www.linkedin.com/in/manjunathgl/">
+    <img src="https://img.shields.io/badge/LinkedIn-Connect%20with%20me-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="Connect with me on LinkedIn"/>
+  </a>
+  <a href="https://github.com/ManjunathGlO">
+    <img src="https://img.shields.io/badge/GitHub-Explore%20my%20projects-181717?style=for-the-badge&logo=github&logoColor=white" alt="Explore my GitHub projects"/>
+  </a>
+</p>
+
+<p align="center">
+  <i>Building. Testing. Debugging. Improving.</i><br/>
+  <b>Turning engineering fundamentals into practical solutions.</b>
+</p>
 
 ---
 
-*This project is intended as a learning and portfolio demonstration of embedded software test automation fundamentals.*
+<p align="center">
+  If you find this project useful, consider giving the repository a ⭐
+</p>
+
+<p align="center">
+  <sub>Developed as an embedded systems test automation learning project.</sub>
+</p>
